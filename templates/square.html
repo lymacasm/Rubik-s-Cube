@@ -1,0 +1,16 @@
+	<div id="d{{integer}}" style="position:absolute; top:{{ypos}}px; left:{{xpos}}px; z-index:{{face}}">
+		<canvas id="{{name}}" width="{{width}}" height="{{height}}" style="border:1px solid {{border}};">
+			Your browser does not support the HTML5 canvas tag.
+		</canvas>
+	</div>
+	
+	<script>
+		var c = document.getElementById("{{name}}");
+		var ctx = c.getContext("2d");
+		c.style.left = "{{xpos}}"
+		c.style.top = "{{ypos}}"
+		ctx.fillStyle = "{{color}}";
+	   	ctx.fillRect(0, 0, {{width}}, {{height}});
+	</script>
+	
+
