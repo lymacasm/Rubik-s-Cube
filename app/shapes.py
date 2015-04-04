@@ -103,22 +103,11 @@ class cube:
 	def __init__(self):
 		self.CubeArray = []
 		for x in range(0,6):
+			#By placing a an instance face() in we make the array type face
 			self.CubeArray.append(face())
+
 		
 	def initialize(self):
-		for code in range(0,6):
-			if code == ColorCode.red:
-				self.CubeArray[code].initialize(Colors.red, code)
-			elif code == ColorCode.blue:
-				self.CubeArray[code].initialize(Colors.blue, code)
-			elif code == ColorCode.white:
-				self.CubeArray[code].initialize(Colors.white, code)
-			elif code == ColorCode.green:
-				self.CubeArray[code].initialize(Colors.green, code)
-			elif code == ColorCode.orange:
-				self.CubeArray[code].initialize(Colors.orange, code)
-			elif code == ColorCode.yellow:
-				self.CubeArray[code].initialize(Colors.yellow, code)
-			else:
-				self.CubeArray[code].initialize(Colors.borderColor, code)
-				
+		for code in range(0,6): #Hard coded cause there will only ever be six sides faces to rubriks
+			self.CubeArray[code].initialize(Colors(faceColors.intToString(code)), code)
+			print code, " ", Colors(Colors(faceColors.intToString(code)))

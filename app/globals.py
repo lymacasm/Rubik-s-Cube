@@ -35,14 +35,14 @@ class colors:
 			return "yellow"
 
 class faceColors:
-	def __init__(self):
-		self.red = 5;
-		self.blue = 4;
-		self.white = 1;
-		self.green = 0;
-		self.orange = 2;
-		self.yellow = 3;
-	
+	red = 5;
+	blue = 4;
+	white = 1;
+	green = 0;
+	orange = 2;
+	yellow = 3;
+		
+
 	def __call__(self, face):
 		if face == self.red:
 			return "red"
@@ -58,6 +58,24 @@ class faceColors:
 			return "yellow"
 		else:
 			return "none"
+
+	@staticmethod
+	def intToString(num):
+		if num == faceColors.red:
+			return "red"
+		elif num == faceColors.blue:
+			return "blue"
+		elif num == faceColors.white:
+			return "white"
+		elif num == faceColors.green:
+			return "green"
+		elif num == faceColors.orange:
+			return "orange"
+		elif num == faceColors.yellow:
+			return "yellow"
+		else:
+			return "none"
+
 			
 		
 class dimensions:
