@@ -1,0 +1,14 @@
+("#update-button").onclick(function(){
+	$.ajax({
+		type: 'GET',
+		url: "localhost:5000/update",
+		dataType: "html",
+		success: function(result){
+			$('body').html("").append(result);
+			console.log("Rubik's cube updated");
+		},
+		error: function(xhr, textStatus, errorThrown){
+			alert('request failed');
+		}
+	}):
+});

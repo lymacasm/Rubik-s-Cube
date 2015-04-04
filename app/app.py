@@ -7,21 +7,25 @@ from graphics import drawRubiks
 from rotations import *
 from scrambler import scramble, scramble2
 from globals import colors
+import pprint
 
 app = Flask(__name__)
 Rubiks = cube()
 Rubiks.initialize()
-#scramble2(Rubiks)
+scramble2(Rubiks)
 Colors = colors() 
-x = 0
-y = 0
-f = 0
 
 @app.route('/')
 def index():
-	scramble2(Rubiks)
 	squares = drawRubiks(Rubiks)
 	return render_template('index.html', squares=squares)
+
+@app.route('/update')
+def update():
+	#pprint.pprint(Rubiks.CubeArray[0].FaceMatrix) 
+	rotateL(Rubiks)
+	squares = drawRubiks(Rubiks)
+	return squares
 
 if __name__ == '__main__':
 	port = int(os.environ.get('PORT', 5000))

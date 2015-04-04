@@ -110,4 +110,4 @@ class cube:
 	def initialize(self):
 		for code in range(0,6): #Hard coded cause there will only ever be six sides faces to rubriks
 			self.CubeArray[code].initialize(Colors(faceColors.intToString(code)), code)
-			print code, " ", Colors(Colors(faceColors.intToString(code)))
+		print self.CubeArray

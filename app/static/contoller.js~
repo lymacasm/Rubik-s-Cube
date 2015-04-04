@@ -1,0 +1,31 @@
+$( "#update-button" ).click(function() {
+  $.ajax({
+		type: 'GET',
+		url: "localhost:5000/update",
+		dataType: "html",
+		success: function(result){
+			$('#rubiks-cube').html("").append(result);
+			console.log("Rubik's cube updated");
+		},
+		error: function(xhr, textStatus, errorThrown){
+			alert('request failed');
+		}
+	});
+});
+
+
+//("#update-button").on("click", function(){});
+/*.click(function(){
+	$.ajax({
+		type: 'GET',
+		url: "localhost:5000/update",
+		dataType: "html",
+		success: function(result){
+			$('#rubiks-cube').html("").append(result);
+			console.log("Rubik's cube updated");
+		},
+		error: function(xhr, textStatus, errorThrown){
+			alert('request failed');
+		}
+	});
+});*/
