@@ -15,6 +15,21 @@ Rubiks.initialize()
 scramble2(Rubiks)
 Colors = colors() 
 
+rotateStringToFunc = {
+	"right" : rotate.right,
+	"right-inverse" : rotate.rightInv,
+	"left" : rotate.left,
+	"left-inverse": rotate.leftInv,
+	"up": rotate.upper,
+	"up-inverse": rotate.upperInv,
+	"down": rotate.down,
+	"down-inverse": rotate.downInv,
+	"front": rotate.front,
+	"front-inverse": rotate.frontInv,
+	"back": rotate.back,
+	"back-inverse": rotate.backInv
+}
+
 @app.route('/')
 def index():
 	squares = drawRubiks(Rubiks)
@@ -28,7 +43,9 @@ def update():
 
 @app.route('/move/<direction>')
 def move(direction):
-	return '<p>' + direction + '</p>' 
+	rotateStringToFunc[direction](Rubiks)
+	squares = drawRubiks(Rubiks)
+	return squares 
 
 if __name__ == '__main__':
 	port = int(os.environ.get('PORT', 5000))
