@@ -1,4 +1,5 @@
 from globals import *
+import copy
 
 Colors = colors()
 
@@ -48,7 +49,7 @@ class Solve:
 		for i in range(0,6):
 			faceArray.append(int())
 		
-		for f in range(0,3):
+		for f in range(0,6):
 			for x in range(0,3):
 				for y in range(0,3):
 					if x != y and x == 1 or y == 1:
@@ -60,5 +61,27 @@ class Solve:
 		self.Cross = faceColors.intToString(face)
 	
 	# Chooses best direction to go to make a cross
-	#def MakeCross(self):
-		
+	def MakeCross(self):
+		# Checks to see if there is a piece lined up for an easy cross placement
+		def CheckStrip(position):
+			rubiksCopy = copy.deepcopy(self.Rubiks)
+			moves = []
+			f = position[0]
+			x = position[1]
+			y = position[2]
+			if x == 0:
+				if f == 0:
+					for i in range(0,3):
+						rotate.left()
+						moves.append(rotate.left)
+						if (Colors(rubiksCopy.CubeArray[f].FaceMatrix[x][y].Square.Color) ==
+							self.Cross):
+							return moves
+				elif f == 1:
+					for i in range(0,3):
+						 
+							
+			
+			
+			
+			
