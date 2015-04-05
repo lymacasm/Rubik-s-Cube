@@ -1,8 +1,9 @@
-from globals import
+from globals import *
 
 Colors = colors()
 
 # This function maps the face to the opposite face of cube
+# SHOULD MOVE TO GLOBALS.PY
 def faceMapper(face):
 	if face == 0:
 		return 4
@@ -33,7 +34,11 @@ class Solve:
 		self.Rubiks = rubiks
 		self.Cross = ""
 		self.Count = 0
+		
+	def Update(self, rubiks):
+		self.Rubiks = rubiks
 	
+	# Chooses which color cross is best to go for
 	def ChooseCross(self):
 		# This array is used to count 
 		# the number of side square occurrences
@@ -48,8 +53,12 @@ class Solve:
 				for y in range(0,3):
 					if x != y and x == 1 or y == 1:
 						if (self.Rubiks.CubeArray[f].FaceMatrix[x][y].Square.Color == 
-							Colors(intToString(faceMapper(f)))):
+							Colors(faceColors.intToString(faceMapper(f)))):
 							faceArray[f] += 1
 							
-		face = findIndexOfMax(faceArray)
-		self.Cross = intToString(face)
+		face = faceMapper(findIndexOfMax(faceArray))
+		self.Cross = faceColors.intToString(face)
+	
+	# Chooses best direction to go to make a cross
+	#def MakeCross(self):
+		
