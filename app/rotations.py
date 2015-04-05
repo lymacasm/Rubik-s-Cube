@@ -1,16 +1,17 @@
 #from shapes import cube
 import copy
 
-# Rotates a matrix either clockwise or counter clockwise
-# Variables:
-# 	matrix: A 3x3 matrix
-# 	direction: a string either:
-#		- "cw" : For clockwise
-#		- "ccw" : For counter clockwise
-# returns rotated matrix (return original matrix if direction
-# 	is in the wrong format)
-class rotate:
 
+class rotate:
+	
+	# Rotates a matrix either clockwise or counter clockwise
+	# Variables:
+	# 	matrix: A 3x3 matrix
+	# 	direction: a string either:
+	#		- "cw" : For clockwise
+	#		- "ccw" : For counter clockwise
+	# returns rotated matrix (return original matrix if direction
+	# 	is in the wrong format)
 	@staticmethod 
 	def rotateMatrix(matrix, direction):
 		column1 = copy.deepcopy(matrix[0])
