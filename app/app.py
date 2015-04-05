@@ -8,12 +8,18 @@ from rotations import *
 from scrambler import scramble, scramble2
 from globals import colors
 import pprint
+from solver import Solve
 
 app = Flask(__name__)
 Rubiks = cube()
 Rubiks.initialize()
 scramble2(Rubiks)
-Colors = colors() 
+Colors = colors()
+Solver = Solve(Rubiks)
+Solver.ChooseCross()
+print ""
+print Solver.Cross
+print ""
 
 rotateStringToFunc = {
 	"right" : rotate.right,
@@ -37,7 +43,10 @@ def index():
 
 @app.route('/update')
 def update(): 
-	rotate.leftInv(Rubiks)
+	move = Solver.MakeCross()
+	if move != None:
+		move(Rubiks)
+	Solver.Update(Rubiks)
 	squares = drawRubiks(Rubiks)
 	return squares
 

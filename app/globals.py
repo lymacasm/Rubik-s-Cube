@@ -75,6 +75,23 @@ class faceColors:
 			return "yellow"
 		else:
 			return "none"
+			
+	@staticmethod
+	def stringToInt(string):	
+		if string == "red":
+			return faceColors.red
+		elif string == "blue":
+			return faceColors.blue
+		elif string == "white":
+			return faceColors.white
+		elif string == "green":
+			return faceColors.green
+		elif string == "orange":
+			return faceColors.orange
+		elif string == "yellow":
+			return faceColors.yellow
+		else:	
+			return -1
 
 			
 		
