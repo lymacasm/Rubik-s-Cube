@@ -10,6 +10,7 @@ import copy
 # returns rotated matrix (return original matrix if direction
 # 	is in the wrong format)
 class rotate:
+
 	@staticmethod 
 	def rotateMatrix(matrix, direction):
 		column1 = copy.deepcopy(matrix[0])
