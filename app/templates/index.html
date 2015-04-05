@@ -7,6 +7,24 @@
 <body>
 
 <button id="update-button">Update!</button>
+<table id="manual-controls">
+	<tr>
+		<td><button data-direction="left">Left</button></td>
+		<td><button data-direction="right">Right</button></td>
+		<td><button data-direction="up">Up</button></td>
+		<td><button data-direction="down">Down</button></td>
+		<td><button data-direction="front">Front</button></td>
+		<td><button data-direction="back">Back</button></td>
+	</tr>
+	<tr>
+		<td><button data-direction="left-inverse">Left'</button></td>
+		<td><button data-direction="right-inverse">Right'</button></td>
+		<td><button data-direction="up-inverse">Up'</button></td>
+		<td><button data-direction="down-inverse">Down'</button></td>
+		<td><button data-direction="front-inverse">Front'</button></td>
+		<td><button data-direction="back-inverse">Back'</button></td>
+	</tr>
+</table>
 
 <div id=rubiks-cube>   	
 {{squares|safe}}

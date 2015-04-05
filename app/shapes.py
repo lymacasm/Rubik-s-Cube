@@ -1,6 +1,5 @@
 from globals import colors, faceColors
 from matcher import magicBox
-from rotations import rotateMatrix
 
 Colors = colors()
 ColorCode = faceColors()
@@ -110,4 +109,3 @@ class cube:
 	def initialize(self):
 		for code in range(0,6): #Hard coded cause there will only ever be six sides faces to rubriks
 			self.CubeArray[code].initialize(Colors(faceColors.intToString(code)), code)
-		print self.CubeArray

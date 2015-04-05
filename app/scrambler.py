@@ -38,18 +38,18 @@ def scramble2(rubiks):
 	iterations = 5
 	moves = []
 	for i in range(0,iterations):
-		moves.append(rotateL)
-		moves.append(rotateLi)
-		moves.append(rotateR)
-		moves.append(rotateRi)
-		moves.append(rotateU)
-		moves.append(rotateUi)
-		moves.append(rotateD)
-		moves.append(rotateDi)
-		moves.append(rotateF)
-		moves.append(rotateFi)
-		moves.append(rotateB)
-		moves.append(rotateBi)
+		moves.append(rotate.left)
+		moves.append(rotate.leftInv)
+		moves.append(rotate.right)
+		moves.append(rotate.rightInv)
+		moves.append(rotate.upper)
+		moves.append(rotate.upperInv)
+		moves.append(rotate.down)
+		moves.append(rotate.downInv)
+		moves.append(rotate.front)
+		moves.append(rotate.frontInv)
+		moves.append(rotate.back)
+		moves.append(rotate.backInv)
 		
 	shuffle(moves)
 	for i in range(0,len(moves)):

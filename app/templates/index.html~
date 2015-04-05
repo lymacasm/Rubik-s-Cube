@@ -7,6 +7,24 @@
 <body>
 
 <button id="update-button">Update!</button>
+<table id="manual-controls">
+	<tr>
+		<td><button id="left">Left</button></td>
+		<td><button id="right">Right</button></td>
+		<td><button id="up">Up</button></td>
+		<td><button id="down">Down</button></td>
+		<td><button id="front">Front</button></td>
+		<td><button id="back">Back</button></td>
+	</tr>
+	<tr>
+		<td><button id="left-inverse">Left'</button></td>
+		<td><button id="right-inverse">Right'</button></td>
+		<td><button id="up-inverse">Up'</button></td>
+		<td><button id="down-inverse">Down'</button></td>
+		<td><button id="front-inverse">Front'</button></td>
+		<td><button id="back-inverse">Back'</button></td>
+	</tr>
+</table>
 
 <div id=rubiks-cube>   	
 {{squares|safe}}
@@ -14,5 +32,5 @@
 
 </body>
 <script src="{{ url_for('static', filename='jquery-2.1.3.min.js') }}"></script>
-<script src="{{ url_for('static', filename='jquery-2.1.3.min.js') }}"></script>
+<script src="{{ url_for('static', filename='contoller.js') }}"></script>
 </html>

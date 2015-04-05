@@ -82,6 +82,6 @@ class dimensions:
 	def __init__(self):
 		self.width = 25
 		self.height = 25
-		self.origin = [25, 140]
+		self.origin = [25, 240]
 		self.gap = 4
 		

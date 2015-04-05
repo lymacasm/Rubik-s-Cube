@@ -21,11 +21,14 @@ def index():
 	return render_template('index.html', squares=squares)
 
 @app.route('/update')
-def update():
-	#pprint.pprint(Rubiks.CubeArray[0].FaceMatrix) 
-	rotateL(Rubiks)
+def update(): 
+	rotate.leftInv(Rubiks)
 	squares = drawRubiks(Rubiks)
 	return squares
+
+@app.route('/move/<direction>')
+def move(direction):
+	return '<p>' + direction + '</p>' 
 
 if __name__ == '__main__':
 	port = int(os.environ.get('PORT', 5000))

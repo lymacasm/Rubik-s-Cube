@@ -16,7 +16,7 @@ $( "#update-button" ).click(function() {
 $( "#manual-controls td button" ).click(function() {
 	$.ajax({
 		type: 'GET',
-		url: "/move/" + $(this.data("direction"),
+		url: "/move/" + $(this).data("direction"),
 		dataType: "html",
 		success: function(result){
 			$('#rubiks-cube').html("").append(result);
