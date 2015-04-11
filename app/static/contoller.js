@@ -27,3 +27,18 @@ $( "#manual-controls td button" ).click(function() {
 		}
 	});
 });
+
+$( "#scramble" ).click(function() {
+  $.ajax({
+		type: 'GET',
+		url: "/scramble",
+		dataType: "html",
+		success: function(result){
+			$('#rubiks-cube').html("").append(result);
+			console.log("Rubik's cube has been scrambled");
+		},
+		error: function(xhr, textStatus, errorThrown){
+			alert('request failed');
+		}
+	});
+});
