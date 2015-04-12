@@ -50,6 +50,14 @@ def update():
 	squares = drawRubiks(Rubiks)
 	return squares
 
+@app.route('/scramble')
+def scramble():
+	scramble2(Rubiks)
+	Solver.ChooseCross()
+	print Solver.Cross
+	return drawRubiks(Rubiks)
+
+
 @app.route('/move/<direction>')
 def move(direction):
 	rotateStringToFunc[direction](Rubiks)
