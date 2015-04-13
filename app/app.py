@@ -43,7 +43,7 @@ def index():
 
 @app.route('/update')
 def update(): 
-	move = Solver.MakeCross()
+	move = Solver.MakeMove()
 	if move != None:
 		move(Rubiks)
 	Solver.Update(Rubiks)

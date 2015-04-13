@@ -31,13 +31,13 @@ def findIndexOfMax(array):
 			index = i
 	return index
 		
-
 class Solve:
 	def __init__(self, rubiks):
 		self.Rubiks = rubiks # The rubiks cube
 		self.Cross = "" # The color of the cross
 		self.Count = 0 # The number of turns taken
 		self.Moves = [] # A queue of moves to execute
+		self.State = 1
 		
 	def Update(self, rubiks):
 		self.Rubiks = rubiks
@@ -62,6 +62,16 @@ class Solve:
 							
 		face = faceMapper(findIndexOfMax(faceArray))
 		self.Cross = faceColors.intToString(face)
+		
+	# Checks if there is a cross of a given color on a given face
+	def isCross(self, faceIndex, color):
+		if (self.Rubiks.CubeArray[faceIndex].FaceMatrix[0][1].Square.Color == Colors(color)
+			and self.Rubiks.CubeArray[faceIndex].FaceMatrix[1][0].Square.Color == Colors(color)
+			and self.Rubiks.CubeArray[faceIndex].FaceMatrix[2][1].Square.Color == Colors(color)
+			and self.Rubiks.CubeArray[faceIndex].FaceMatrix[1][2].Square.Color == Colors(color)):
+			return True
+		else:
+			return False
 	
 	# Chooses best direction to go to make a cross
 	def MakeCross(self):
@@ -367,7 +377,7 @@ class Solve:
 				if (self.Rubiks.CubeArray[face.UpFace.Number].FaceMatrix[1][0].Square.Color 
 					== Colors(self.Cross)):
 					up = True
-				if (self.Rubiks.CubeArray[face.DownFace.Number].FaceMatrix[0][1].Square.Color
+				if (self.Rubiks.CubeArray[face.DownFace.Number].FaceMatrix[1][2].Square.Color
 					== Colors(self.Cross)):
 					down = True
 				if (self.Rubiks.CubeArray[face.RightFace.Number].FaceMatrix[2][1].Square.Color
@@ -403,10 +413,10 @@ class Solve:
 					== Colors(self.Cross)):
 					left = True
 			elif face.Number == 5:
-				if (self.Rubiks.CubeArray[face.UpFace.Number].FaceMatrix[2][1].Square.Color 
+				if (self.Rubiks.CubeArray[face.UpFace.Number].FaceMatrix[1][2].Square.Color 
 					== Colors(self.Cross)):
 					up = True
-				if (self.Rubiks.CubeArray[face.DownFace.Number].FaceMatrix[2][1].Square.Color
+				if (self.Rubiks.CubeArray[face.DownFace.Number].FaceMatrix[1][0].Square.Color
 					== Colors(self.Cross)):
 					down = True
 				if (self.Rubiks.CubeArray[face.RightFace.Number].FaceMatrix[2][1].Square.Color
@@ -426,7 +436,7 @@ class Solve:
 							for x in range(0,3):
 								self.Moves.pop()
 							self.Moves.append(face.FrontInv)
-							break
+						break
 					face.Front(rubiksCopy)
 					self.Moves.append(face.Front)
 				self.Moves.append(face.UpperInv)
@@ -442,7 +452,7 @@ class Solve:
 							for x in range(0,3):
 								self.Moves.pop()
 							self.Moves.append(face.FrontInv)
-							break
+						break
 					face.Front(rubiksCopy)
 					self.Moves.append(face.Front)
 				self.Moves.append(face.DownInv)
@@ -458,7 +468,7 @@ class Solve:
 							for x in range(0,3):
 								self.Moves.pop()
 							self.Moves.append(face.FrontInv)
-							break
+						break
 					face.Front(rubiksCopy)
 					self.Moves.append(face.Front)
 				self.Moves.append(face.LeftInv)
@@ -474,16 +484,128 @@ class Solve:
 							for x in range(0,3):
 								self.Moves.pop()
 							self.Moves.append(face.FrontInv)
-							break
+						break
 					face.Front(rubiksCopy)
 					self.Moves.append(face.Front)
 				self.Moves.append(face.RightInv)
 				self.Moves.append(face.FrontInv)
 				self.Moves.append(face.Front)
 				return
+			#### End of CheckFirstStrip
 			
+		def CheckThirdStrip(face):
+			up = False
+			down = False
+			right = False
+			left = False
+			# Finding if there are places where we can draw juicy pieces
+			if face.Number == 0:
+				if (self.Rubiks.CubeArray[face.UpFace.Number].FaceMatrix[0][1].Square.Color 
+					== Colors(self.Cross)):
+					up = True
+				if (self.Rubiks.CubeArray[face.DownFace.Number].FaceMatrix[0][1].Square.Color
+					== Colors(self.Cross)):
+					down = True
+				if (self.Rubiks.CubeArray[face.RightFace.Number].FaceMatrix[0][1].Square.Color
+					== Colors(self.Cross)):
+					right = True
+				if (self.Rubiks.CubeArray[face.LeftFace.Number].FaceMatrix[2][1].Square.Color
+					== Colors(self.Cross)):
+					left = True
+			elif face.Number == 1:
+				if (self.Rubiks.CubeArray[face.UpFace.Number].FaceMatrix[1][2].Square.Color 
+					== Colors(self.Cross)):
+					up = True
+				if (self.Rubiks.CubeArray[face.DownFace.Number].FaceMatrix[1][2].Square.Color
+					== Colors(self.Cross)):
+					down = True
+				if (self.Rubiks.CubeArray[face.RightFace.Number].FaceMatrix[1][2].Square.Color
+					== Colors(self.Cross)):
+					right = True
+				if (self.Rubiks.CubeArray[face.LeftFace.Number].FaceMatrix[1][2].Square.Color
+					== Colors(self.Cross)):
+					left = True
+			elif face.Number == 2:
+				if (self.Rubiks.CubeArray[face.UpFace.Number].FaceMatrix[1][2].Square.Color 
+					== Colors(self.Cross)):
+					up = True
+				if (self.Rubiks.CubeArray[face.DownFace.Number].FaceMatrix[1][0].Square.Color
+					== Colors(self.Cross)):
+					down = True
+				if (self.Rubiks.CubeArray[face.RightFace.Number].FaceMatrix[0][1].Square.Color
+					== Colors(self.Cross)):
+					right = True
+				if (self.Rubiks.CubeArray[face.LeftFace.Number].FaceMatrix[2][1].Square.Color
+					== Colors(self.Cross)):
+					left = True
+			elif face.Number == 3:
+				if (self.Rubiks.CubeArray[face.UpFace.Number].FaceMatrix[1][0].Square.Color 
+					== Colors(self.Cross)):
+					up = True
+				if (self.Rubiks.CubeArray[face.DownFace.Number].FaceMatrix[1][0].Square.Color
+					== Colors(self.Cross)):
+					down = True
+				if (self.Rubiks.CubeArray[face.RightFace.Number].FaceMatrix[1][0].Square.Color
+					== Colors(self.Cross)):
+					right = True
+				if (self.Rubiks.CubeArray[face.LeftFace.Number].FaceMatrix[1][0].Square.Color
+					== Colors(self.Cross)):
+					left = True
+			elif face.Number == 4:
+				if (self.Rubiks.CubeArray[face.UpFace.Number].FaceMatrix[2][1].Square.Color 
+					== Colors(self.Cross)):
+					up = True
+				if (self.Rubiks.CubeArray[face.DownFace.Number].FaceMatrix[2][1].Square.Color
+					== Colors(self.Cross)):
+					down = True
+				if (self.Rubiks.CubeArray[face.RightFace.Number].FaceMatrix[0][1].Square.Color
+					== Colors(self.Cross)):
+					right = True
+				if (self.Rubiks.CubeArray[face.LeftFace.Number].FaceMatrix[2][1].Square.Color
+					== Colors(self.Cross)):
+					left = True
+			elif face.Number == 5:
+				if (self.Rubiks.CubeArray[face.UpFace.Number].FaceMatrix[1][0].Square.Color 
+					== Colors(self.Cross)):
+					up = True
+				if (self.Rubiks.CubeArray[face.DownFace.Number].FaceMatrix[1][2].Square.Color
+					== Colors(self.Cross)):
+					down = True
+				if (self.Rubiks.CubeArray[face.RightFace.Number].FaceMatrix[0][1].Square.Color
+					== Colors(self.Cross)):
+					right = True
+				if (self.Rubiks.CubeArray[face.LeftFace.Number].FaceMatrix[2][1].Square.Color
+					== Colors(self.Cross)):
+					left = True
+			# Start algorithm
+			if up:
+				self.Moves.append(face.UpperInv)
+				self.Moves.append(face.Front)
+				self.Moves.append(face.RightInv)
+				return
+			elif down:
+				self.Moves.append(face.DownInv)
+				self.Moves.append(face.Front)
+				self.Moves.append(face.LeftInv)
+				return
+			elif right:
+				self.Moves.append(face.RightInv)
+				self.Moves.append(face.Front)
+				self.Moves.append(face.DownInv)
+				return
+			elif left:
+				self.Moves.append(face.LeftInv)
+				self.Moves.append(face.Front)
+				self.Moves.append(face.UpInv)
+				return
+			#### End of CheckThirdStrip
+		
+		# Actual Implementation Starts here		
 		# If there is something in the moves queue, do that move
 		if len(self.Moves) != 0:
+			print ""
+			print "Move queue"
+			print ""
 			self.Count += 1
 			return self.Moves.pop(0)	
 			
@@ -512,9 +634,6 @@ class Solve:
 			for i in range(0,3):
 				faceMoves.Front(rubiksCopy)
 				self.Moves.append(faceMoves.Front)
-				print ""
-				print "i: " + str(i)
-				print "Length of self.Moves: " + str(len(self.Moves))
 				
 				# Reset badPositions
 				del badPositions[:]
@@ -545,14 +664,55 @@ class Solve:
 			
 			CheckTop(face)
 			if len(self.Moves) != 0:
+				print ""
+				print "CheckTop"
+				print ""
 				self.Count += 1
 				return self.Moves.pop(0)
 				
+			del self.Moves[:]
 			CheckFirstStrip(faceMoves)
 			if len(self.Moves) != 0:
+				print ""
+				print "CheckFirstStrip"
+				print ""
+				self.Count += 1
+				return self.Moves.pop(0)
+				
+			del self.Moves[:]
+			CheckThirdStrip(faceMoves)
+			if len(self.Moves) != 0:
+				print ""
+				print "CheckThirdStrip"
+				print ""
 				self.Count += 1
 				return self.Moves.pop(0)
 			
+			return
+			
+	def MakeMove(self):
+		#
+		# State 1: Making first cross on opposite face
+		#
+		if self.State == 1:
+			face = Face(faceMapper(faceColors.stringToInt(self.Cross)))
+			if self.isCross(face.Number, self.Cross):	
+				self.State += 1
+			else:
+				move = self.MakeCross()	
+				if move != None:
+					return move
+				else:
+					print "Semantic error in state: 1"
+					return None
+		
+		#
+		# State 2: Orient first cross side pieces, and bring them 
+		#          to their correct face
+		#
+		#if self.State == 2:
+			
+				
 				
 			
 			
