@@ -41,6 +41,13 @@ class Solve:
 		
 	def Update(self, rubiks):
 		self.Rubiks = rubiks
+		
+	def Reset(self, rubiks):
+		self.Rubiks = rubiks
+		self.ChooseCross()
+		self.Count = 0
+		del self.Moves[:]
+		self.State = 1
 	
 	# Chooses which color cross is best to go for
 	def ChooseCross(self):
@@ -690,6 +697,93 @@ class Solve:
 			
 			return
 			
+	def OrientCross(self):
+		if len(self.Moves) != 0:
+			return self.Moves.pop(0)
+		else:
+			face = Face(faceMapper(faceColors.stringToInt(self.Cross)))
+			print "face.Number: " + str(face.Number)
+			upSecn = False
+			downSecn = False
+			rightSecn = False
+			leftSecn = False
+			up = False
+			down = False
+			right = False
+			left = False
+			rubiksCopy = copy.deepcopy(self.Rubiks)
+			
+			for i in range(0,4):
+				# Actual face check
+				if (rubiksCopy.CubeArray[face.Number].FaceMatrix[0][1].Square.Color ==
+					Colors(self.Cross)):
+					left = True
+				if (rubiksCopy.CubeArray[face.Number].FaceMatrix[1][0].Square.Color ==
+					Colors(self.Cross)):
+					up = True
+				if (rubiksCopy.CubeArray[face.Number].FaceMatrix[1][2].Square.Color ==
+					Colors(self.Cross)):
+					down = True
+				if (rubiksCopy.CubeArray[face.Number].FaceMatrix[2][1].Square.Color ==
+					Colors(self.Cross)):
+					right = True
+					
+				# SquareSecn check
+				print rubiksCopy.CubeArray[face.Number].FaceMatrix[0][1].SquareSecn.Color
+				print Colors(face.LeftFace.Color)
+				if (rubiksCopy.CubeArray[face.Number].FaceMatrix[0][1].SquareSecn.Color ==
+					Colors(face.LeftFace.Color)):
+					print "leftSecn"
+					leftSecn = True
+				if (rubiksCopy.CubeArray[face.Number].FaceMatrix[1][0].SquareSecn.Color ==
+					Colors(face.UpFace.Color)):
+					print "upSecn"
+					upSecn = True
+				if (rubiksCopy.CubeArray[face.Number].FaceMatrix[1][2].SquareSecn.Color ==
+					Colors(face.DownFace.Color)):
+					print "downSecn"
+					downSecn = True
+				if (rubiksCopy.CubeArray[face.Number].FaceMatrix[2][1].SquareSecn.Color ==
+					Colors(face.RightFace.Color)):
+					print "rightSecn"
+					rightSecn = True
+			
+				# Logic
+				if up and upSecn:
+					if i == 3:
+						del self.Moves[:]
+						self.Moves.append(face.FrontInv)
+					self.Moves.append(face.Upper)
+					self.Moves.append(face.Upper)
+					return self.Moves.pop(0)
+				elif down and downSecn:
+					if i == 3:
+						del self.Moves[:]
+						self.Moves.append(face.FrontInv)
+					self.Moves.append(face.Down)
+					self.Moves.append(face.Down)
+					return self.Moves.pop(0)
+				elif right and rightSecn:
+					if i == 3:
+						del self.Moves[:]
+						self.Moves.append(face.FrontInv)
+					self.Moves.append(face.Right)
+					self.Moves.append(face.Right)
+					return self.Moves.pop(0)
+				elif left and leftSecn:
+					if i == 3:
+						del self.Moves[:]
+						self.Moves.append(face.FrontInv)
+					self.Moves.append(face.Left)
+					self.Moves.append(face.Left)
+					return self.Moves.pop(0)
+				
+				face.Front(rubiksCopy)
+				self.Moves.append(face.Front)
+				up = right = left = down = False
+				upSecn = rightSecn = leftSecn = downSecn = False
+			del self.Moves[:]
+			
 	def MakeMove(self):
 		#
 		# State 1: Making first cross on opposite face
@@ -710,8 +804,17 @@ class Solve:
 		# State 2: Orient first cross side pieces, and bring them 
 		#          to their correct face
 		#
-		#if self.State == 2:
-			
+		if self.State == 2:
+			face = Face(faceColors.stringToInt(self.Cross))
+			if self.isCross(face.Number, self.Cross):	
+				self.State += 1
+			else:
+				move = self.OrientCross()
+				if move != None:
+					return move
+				else:
+					print "Semantic error in state: 2"
+					return None
 				
 				
 			

@@ -53,7 +53,7 @@ def update():
 @app.route('/scramble')
 def scramble():
 	scramble2(Rubiks)
-	Solver.ChooseCross()
+	Solver.Reset(Rubiks)
 	print Solver.Cross
 	return drawRubiks(Rubiks)
 
