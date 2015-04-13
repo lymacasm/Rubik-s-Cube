@@ -10,6 +10,7 @@ ColorCode = faceColors()
 class square:
 	def __init__(self):
 		self.Color = "#000000"
+		self.Position = []
 	
 	def initialize(self, color):
 		self.Color = color
@@ -31,12 +32,14 @@ class side:
 	def __init__(self):
 		self.Square = square()
 		self.SquareSecn = square()
+		self.connections = []
 		
 	def initialize(self, color, location):
 		self.Square.initialize(color)
-		secnColor = magicBox(color, location)
-		if secnColor != None:
-			self.SquareSecn.initialize(secnColor)
+		secnSquare = magicBox(color, location)
+		if secnSquare != None:
+			self.SquareSecn.initialize(secnSquare["Color"])
+			self.connections = secnSquare["connects"]
 			
 			
 
@@ -48,6 +51,7 @@ class corner:
 		self.Square = square()
 		self.SquareVert = square()
 		self.SquareHori = square()
+		self.connections = []
 		
 	def initialize(self, color, location):
 		self.Square.initialize(color)
@@ -55,6 +59,7 @@ class corner:
 		if vertHoriObject != None:
 			self.SquareVert.initialize(vertHoriObject["vert"])
 			self.SquareHori.initialize(vertHoriObject["hori"])
+			self.connections = vertHoriObject["connects"]
 
 # ----------------------------------------	
 # A face, contains the following:
