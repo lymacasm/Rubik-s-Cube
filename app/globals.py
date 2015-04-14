@@ -102,3 +102,178 @@ class dimensions:
 		self.origin = [25, 240]
 		self.gap = 4
 		
+def connectingPiecesLoc(face, x, y):
+	if x == 0 and y == 0:
+		if face == 0:
+			return [{"face":3, "cords":[0,0]}, {"face":5, "cords":[2,0]}] 
+		
+		elif face == 1:
+			return [{"face":2, "cords":[0,2]}, {"face":0, "cords":[2,2]}] 
+		
+		elif face == 2:
+			return [{"face":0, "cords":[2,0]}, {"face":3, "cords":[0,2]}] 
+		
+		elif face == 3:
+			return [{"face":0, "cords":[0,0]}, {"face":5, "cords":[2,0]}] 
+			
+		elif face == 4:
+			return [{"face":2, "cords":[2,0]}, {"face":3, "cords":[2,2]}]
+			
+		elif face == 5:
+			return [{"face":4, "cords":[2,0]}, {"face":3, "cords":[2,0]}]
+		
+		else:
+			return None
+			
+	elif x == 1 and y == 0:
+		if face == 0:
+			return [{"face" : 3, "cords" : [0,1]}]
+			
+		elif face == 1:
+			return [{"face" : 2, "cords" : [1,2]}]
+		
+		elif face == 2:
+			return [{"face" : 3, "cords" : [1,2]}]
+		
+		elif face == 3:
+			return [{"face":5, "cords" : [1,0]}]
+			
+		elif face == 4:
+			return [{"face":3, "cords": [2,1]}]
+		
+		elif face == 5:
+			return [{"face":3, "cords": [1,0]}]
+		
+		else:
+			return None
+			
+	elif x == 2 and y == 0:
+		if face == 0:
+			return [{"face":2, "cords":[0,0]}, {"face":3, "cords":[0,2]}]
+		
+		elif face == 1:
+			return [{"face":2, "cords":[2,2]}, {"face":4, "cords":[0,2]}]
+		
+		elif face == 2:
+			return [{"face":3, "cords":[2,2]}, {"face":4, "cords":[0,0]}]
+		
+		elif face == 3:
+			return [{"face":4, "cords":[2,0]}, {"face":5, "cords":[0,0]}]
+			
+		elif face == 4:
+			return [{"face":3, "cords":[2,0]}, {"face":5, "cords":[0,0]}]
+			
+		elif face == 5:
+			return [{"face":3, "cords":[0,0]}, {"face":0, "cords":[0,0]}]
+		else: 
+			return None	
+	
+	elif x == 0 and y == 1:
+		if face == 0:
+			return [{"face":5, "cords":[2,1]}]
+		
+		elif face == 1:
+			return [{"face":0,"cords":[1,2]}]
+			
+		elif face == 2:
+			return [{"face":0, "cords":[2,1]}]
+			
+		elif face == 3:
+			return [{"face":0,"cords":[1,0]}]
+			
+		elif face == 4:
+			return [{"face":2, "cords":[2,1]}]
+			
+		elif face == 5:
+			return [{"face":4, "cords":[2,1]}]
+			
+		else:	
+			return None
+			
+	elif x == 2 and y == 1:
+		if face == 0:
+			return [{"face":2, "cords":[0,1]}]
+		
+		elif face == 1:
+			return [{"face":4, "cords":[1,2]}]
+			
+		elif face == 2:
+			return [{"face":4,"cords":[0,1]}]
+			
+		elif face == 3:
+			return [{"face":4,"cords":[1,0]}]
+			
+		elif face == 4:
+			return [{"face":5,"cords":[0,1]}]
+			
+		elif face == 5:
+			return [{"face":0, "cords":[0,1]}]
+			
+		else:
+			return None
+			
+	elif x == 0 and y == 2:
+		if face == 0:
+			return [{"face":5,"cords":[2,2]},{"face":1,"cords":[0,2]}]
+			
+		elif face == 1:
+			return [{"face":5,"cords":[2,2]},{"face":0,"cords":[0,2]}]
+			
+		elif face == 2:
+			return [{"face":1, "cords":[0,0]},{"face":0,"cords":[2,2]}]
+			
+		elif face == 3:
+			return [{"face":2,"cords":[0,0]},{"face":0,"cords":[2,0]}]
+			
+		elif face == 4:
+			return [{"face":1,"cords":[2,0]},{"face":2,"cords":[2,2]}]
+			
+		elif face == 5:
+			return [{"face":1,"cords":[2,2]},{"face":4,"cords":[2,2]}]
+			
+		else:
+			return None
+			
+	elif x == 1 and y == 2:
+		if face == 0:
+			return [{"face":1,"cords":[0,1]}]
+			
+		elif face == 1:
+			return [{"face":5,"cords":[1,2]}]
+			
+		elif face == 2:
+			return [{"face":1,"cords":[1,0]}]
+			
+		elif face == 3:
+			return [{"face":2,"cords":[1,0]}]
+			
+		elif face == 4:
+			return [{"face":1,"cords":[2,1]}]
+			
+		elif face == 5:
+			return [{"face":1,"cords":[1,2]}]
+			
+		else:	
+			return None
+			
+	elif x == 2 and y == 2:
+		if face == 0:
+			return [{"face":1,"cords":[0,0]},{"face":2,"cords":[0,2]}]
+		
+		elif face == 1:
+			return [{"face":5,"cords":[0,2]},{"face":4,"cords":[2,2]}]
+			
+		elif face == 2:
+			return [{"face":1,"cords":[2,0]},{"face":4,"cords":[0,2]}]
+			
+		elif face == 3:
+			return [{"face":2,"cords":[2,0]},{"face":4,"cords":[0,0]}]
+		
+		elif face == 4:
+			return [{"face":1,"cords":[2,2]},{"face":5,"cords":[0,2]}]
+			
+		elif face == 5:
+			return [{"face":1,"cords":[0,2]},{"face":0,"cords":[0,2]}]
+		
+		else:
+			return None
