@@ -79,7 +79,28 @@ class Solve:
 			return True
 		else:
 			return False
-	
+			
+	def isFirstCrossComplete(self, face):
+		for x in range(0,3):
+			for y in range(0,3):
+				if (x == 1 and y != 1) or (x != 1 and y == 1):
+					stripColor = Colors(
+						self.Rubiks.CubeArray[face.Number].FaceMatrix[x][y].SquareSecn.Color)
+					if x == 0:
+						if stripColor != face.LeftFace.Color:
+							return False
+					elif x == 2:
+						if stripColor != face.RightFace.Color:
+							return False
+					elif y == 0:
+						if stripColor != face.UpFace.Color:
+							return False
+					elif y == 2:
+						if stripColor != face.DownFace.Color:
+							return False
+		return True
+		#### End of isFirstStripComplete
+						
 	# Chooses best direction to go to make a cross
 	def MakeCross(self):
 		
@@ -702,7 +723,6 @@ class Solve:
 			return self.Moves.pop(0)
 		else:
 			face = Face(faceMapper(faceColors.stringToInt(self.Cross)))
-			print "face.Number: " + str(face.Number)
 			upSecn = False
 			downSecn = False
 			rightSecn = False
@@ -733,19 +753,15 @@ class Solve:
 				print Colors(face.LeftFace.Color)
 				if (rubiksCopy.CubeArray[face.Number].FaceMatrix[0][1].SquareSecn.Color ==
 					Colors(face.LeftFace.Color)):
-					print "leftSecn"
 					leftSecn = True
 				if (rubiksCopy.CubeArray[face.Number].FaceMatrix[1][0].SquareSecn.Color ==
 					Colors(face.UpFace.Color)):
-					print "upSecn"
 					upSecn = True
 				if (rubiksCopy.CubeArray[face.Number].FaceMatrix[1][2].SquareSecn.Color ==
 					Colors(face.DownFace.Color)):
-					print "downSecn"
 					downSecn = True
 				if (rubiksCopy.CubeArray[face.Number].FaceMatrix[2][1].SquareSecn.Color ==
 					Colors(face.RightFace.Color)):
-					print "rightSecn"
 					rightSecn = True
 			
 				# Logic
@@ -806,15 +822,18 @@ class Solve:
 		#
 		if self.State == 2:
 			face = Face(faceColors.stringToInt(self.Cross))
-			if self.isCross(face.Number, self.Cross):	
+			if self.isCross(face.Number, self.Cross) and self.isFirstCrossComplete(face):	
+				print "State 2 -> State 3"
 				self.State += 1
 			else:
+				print "Still State 2"
 				move = self.OrientCross()
 				if move != None:
 					return move
 				else:
 					print "Semantic error in state: 2"
 					return None
+					
 				
 				
 			
