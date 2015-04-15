@@ -81,6 +81,8 @@ class Solve:
 			return False
 			
 	def isFirstCrossComplete(self, face):
+		if self.isCross(face.Number, self.Cross) == False:
+			return False
 		for x in range(0,3):
 			for y in range(0,3):
 				if (x == 1 and y != 1) or (x != 1 and y == 1):
@@ -822,7 +824,7 @@ class Solve:
 		#
 		if self.State == 2:
 			face = Face(faceColors.stringToInt(self.Cross))
-			if self.isCross(face.Number, self.Cross) and self.isFirstCrossComplete(face):	
+			if self.isFirstCrossComplete(face):	
 				print "State 2 -> State 3"
 				self.State += 1
 			else:
@@ -833,6 +835,13 @@ class Solve:
 				else:
 					print "Semantic error in state: 2"
 					return None
+		
+		#
+		# State 3: Get the four corners of the first face
+		#
+		if self.State == 3:
+			# For Andy to implement
+			self.State += 1
 					
 				
 				
